@@ -1,0 +1,3 @@
+import Link from "next/link";
+export default function NotFound() { return <section className="page-shell container-shell grid place-items-center text-center"><div><p className="font-heading text-9xl text-lion">404</p><h1 className="font-heading text-5xl uppercase text-white">Esta ruta no es parte de la manada</h1><p className="mt-4 text-muted">Volvé al inicio o buscá tu sede más cercana.</p><div className="mt-7 flex justify-center gap-3"><Link href="/" className="button-base button-primary">Ir al inicio</Link><Link href="/sedes" className="button-base button-ghost">Ver sedes</Link></div></div></section>; }
+

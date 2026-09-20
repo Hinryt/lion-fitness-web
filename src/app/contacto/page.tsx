@@ -1,0 +1,11 @@
+import type { Metadata } from "next";
+import { MapPin, MessageCircle, Phone } from "lucide-react";
+import { LeadForm } from "@/components/forms/lead-form";
+import { PageHero } from "@/components/ui/page-hero";
+import { branches, siteConfig } from "@/data/demo";
+import { whatsappUrl } from "@/lib/utils";
+
+export const metadata: Metadata = { title: "Contacto", description: "Consultá por sedes, planes, clases de prueba o equipamiento Lion Fitness." };
+type Props = { searchParams: Promise<{ motivo?: string }> };
+export default async function ContactPage({ searchParams }: Props) { const { motivo } = await searchParams; const defaultReason = motivo?.includes("clase") ? "Clase de prueba" : motivo === "plan" ? "Planes" : motivo === "inscripcion" ? "Inscripción" : "Consulta general"; return <><PageHero eyebrow="Hablemos" title="Tu consulta, en el canal que prefieras" description="Escribinos por el formulario o abrí una conversación de WhatsApp con un mensaje contextual." /><section className="section-space"><div className="container-shell grid gap-10 lg:grid-cols-[.7fr_1.3fr]"><aside className="space-y-5"><a href={whatsappUrl("Hola Lion Fitness, llegué desde la página de contacto.")} target="_blank" rel="noreferrer" className="flex gap-4 border border-lion/30 bg-card p-5"><MessageCircle className="text-lion" /><span><strong className="block text-white">WhatsApp</strong><small className="text-muted">{siteConfig.phoneDisplay}</small></span></a><div className="flex gap-4 border border-white/10 bg-card p-5"><Phone className="text-lion" /><span><strong className="block text-white">Teléfono</strong><small className="text-muted">{siteConfig.phoneDisplay}</small></span></div>{branches.map((branch) => <div key={branch.id} className="flex gap-4 border border-white/10 bg-card p-5"><MapPin className="shrink-0 text-lion" /><span><strong className="block text-white">{branch.shortName}</strong><small className="text-muted">{branch.address}<br />{branch.schedule}</small></span></div>)}</aside><div className="border border-white/10 bg-card p-6 sm:p-8"><h2 className="font-heading text-4xl uppercase text-white">Contanos qué necesitás</h2><div className="mt-7"><LeadForm defaultReason={defaultReason} /></div></div></div></section></>; }
+

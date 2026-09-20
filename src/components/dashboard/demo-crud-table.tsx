@@ -1,0 +1,14 @@
+"use client";
+
+import { Archive, Plus, Search } from "lucide-react";
+import { useMemo, useState } from "react";
+
+type Row = { id: string; name: string; detail: string; status: string };
+export function DemoCrudTable({ title, rows: initialRows }: { title: string; rows: Row[] }) {
+  const [rows, setRows] = useState(initialRows); const [query, setQuery] = useState(""); const [notice, setNotice] = useState("");
+  const filtered = useMemo(() => rows.filter((row) => `${row.name} ${row.detail} ${row.status}`.toLowerCase().includes(query.toLowerCase())), [rows, query]);
+  const add = () => { const number = rows.length + 1; setRows((current) => [{ id: `local-${Date.now()}`, name: `${title} demo ${number}`, detail: "Creado localmente en esta sesión", status: "Borrador" }, ...current]); setNotice("Registro demo creado. No se persistirá al recargar."); };
+  const archive = (id: string) => { setRows((current) => current.map((row) => row.id === id ? { ...row, status: "Archivado" } : row)); setNotice("Registro archivado en modo demostración."); };
+  return <div><div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"><div><p className="eyebrow">Gestión demo</p><h1 className="mt-3 font-heading text-5xl uppercase text-white">{title}</h1></div><button onClick={add} className="button-base button-primary"><Plus size={17} /> Nuevo registro</button></div>{notice && <p role="status" className="mt-5 border border-lion/30 bg-lion/10 p-3 text-sm text-[#fff2a6]">{notice}</p>}<label className="relative mt-7 block max-w-lg"><span className="sr-only">Buscar registros</span><Search className="absolute left-4 top-1/2 -translate-y-1/2 text-muted" size={18} /><input className="input pl-11" placeholder="Buscar por nombre, detalle o estado" value={query} onChange={(event) => setQuery(event.target.value)} /></label>{filtered.length === 0 ? <div className="empty-state"><Search /><h2>Sin resultados</h2><p>Probá con otro término de búsqueda.</p></div> : <div className="mt-6 overflow-x-auto border border-white/10"><table className="w-full min-w-[680px] text-left text-sm"><thead className="bg-card text-xs uppercase text-muted"><tr><th className="p-4">Nombre</th><th className="p-4">Detalle</th><th className="p-4">Estado</th><th className="p-4">Acción</th></tr></thead><tbody>{filtered.map((row) => <tr key={row.id} className="border-t border-white/10"><th className="p-4 text-white">{row.name}</th><td className="p-4 text-muted">{row.detail}</td><td className="p-4"><span className="unit-pill unit-equipment">{row.status}</span></td><td className="p-4"><button onClick={() => archive(row.id)} disabled={row.status === "Archivado"} className="flex items-center gap-2 text-xs font-bold text-lion disabled:text-muted"><Archive size={15} />{row.status === "Archivado" ? "Archivado" : "Archivar"}</button></td></tr>)}</tbody></table></div>}</div>;
+}
+

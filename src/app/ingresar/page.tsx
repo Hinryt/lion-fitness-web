@@ -1,0 +1,6 @@
+import type { Metadata } from "next";
+import { DemoLogin } from "@/components/forms/demo-login";
+
+export const metadata: Metadata = { title: "Ingresar", description: "Acceso demostrativo para socios y administración de Lion Fitness." };
+type Props = { searchParams: Promise<{ role?: string }> };
+export default async function LoginPage({ searchParams }: Props) { const { role } = await searchParams; return <section className="page-shell grid-texture"><div className="container-shell grid gap-10 lg:grid-cols-2 lg:items-center"><div><p className="eyebrow">Área privada</p><h1 className="mt-4 font-heading text-6xl uppercase leading-none text-white sm:text-8xl">Todo tu entrenamiento, en un solo lugar.</h1><p className="mt-6 max-w-xl text-lg leading-8 text-muted">Rutina, reservas, progreso, pagos y credencial. El MVP permite recorrer ambos roles sin credenciales reales.</p></div><div className="mx-auto w-full max-w-md border border-white/10 bg-card p-6 sm:p-8"><h2 className="font-heading text-4xl uppercase text-white">Ingresar</h2><div className="mt-7"><DemoLogin initialRole={role === "admin" ? "admin" : "member"} /></div></div></div></section>; }

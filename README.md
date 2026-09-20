@@ -1,36 +1,115 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Lion Fitness
 
-## Getting Started
+MVP responsive para el ecosistema Lion Fitness: sitio comercial, catálogo de equipamiento, portal de socios y administración demostrativa.
 
-First, run the development server:
+> Los precios, testimonios, perfiles, métricas, cupos y movimientos privados incluidos son datos de demostración. No representan actividad comercial real.
+
+## Tecnologías
+
+- Next.js 16 con App Router, React 19 y TypeScript estricto.
+- Tailwind CSS 4 y design tokens propios.
+- React Hook Form + Zod para validación cliente/servidor.
+- Lucide React y Recharts.
+- PWA con manifest, iconos y service worker básico offline.
+
+## Instalación y ejecución
+
+Requisitos: Node.js 20 o superior y npm.
 
 ```bash
+npm install
+copy .env.example .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abrir [http://localhost:3000](http://localhost:3000). Para validar producción:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run lint
+npm run typecheck
+npm run build
+npm start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Con la aplicación iniciada en el puerto 3000, `npm run smoke` verifica todas las URLs del sitemap y los recursos públicos principales.
 
-## Learn More
+## Variables de entorno
 
-To learn more about Next.js, take a look at the following resources:
+Copiar `.env.example` a `.env.local`. Solo `NEXT_PUBLIC_SITE_URL` se utiliza en el MVP. Las demás variables documentan los adaptadores previstos y deben mantenerse vacías hasta conectar proveedores reales.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Variable | Uso futuro |
+| --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | Canonical, sitemap y metadata |
+| `DATABASE_URL` | PostgreSQL o proveedor compatible |
+| `AUTH_SECRET` | Proveedor de autenticación |
+| `MERCADO_PAGO_ACCESS_TOKEN` | Checkout de membresías |
+| `WHATSAPP_ACCESS_TOKEN` | WhatsApp Business API |
+| `MAPS_API_KEY` | Google Maps o Mapbox |
+| `EMAIL_API_KEY` | Notificaciones transaccionales |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Acceso demostrativo
 
-## Deploy on Vercel
+Ingresar en `/ingresar` y elegir Socio o Administrador. Los campos muestran como referencia:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Socio: `socio@demo.lion` / `liondemo`
+- Admin: `admin@demo.lion` / `liondemo`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+El MVP crea una cookie de sesión HTTP-only con el rol elegido y `src/proxy.ts` protege `/mi-cuenta` y `/admin`. No valida identidades reales; antes de producción se debe sustituir por un proveedor de autenticación y autorización persistente.
+
+## Estructura
+
+```text
+src/
+  app/                 Rutas, metadata, API y estados globales
+  components/
+    dashboard/         Portal de socio y administración
+    explorers/         Filtros de sedes, horarios y catálogo
+    forms/             Formularios y flujo de conversión
+    layout/            Header, footer, navegación y PWA
+    ui/                Primitivas visuales
+  data/demo.ts         Fuente única de datos demostrativos
+  lib/                 Esquemas, utilidades y adaptadores
+  types/domain.ts      Entidades tipadas del dominio
+public/
+  images/              Recursos visuales reemplazables
+  sw.js                Service worker offline básico
+```
+
+## Editar contenido
+
+- Sedes, horarios, actividades, planes, profesores, productos, teléfono y enlaces: `src/data/demo.ts`.
+- Colores y sistema visual: `src/app/globals.css`.
+- Imágenes: los recursos seleccionados de los perfiles oficiales están en `public/images/instagram`; las asignaciones de sedes y productos viven en `src/data/demo.ts`.
+- Logo: el isotipo oficial utilizado por la interfaz está en `public/brand/lion-mark.jpg` y se renderiza desde `src/components/ui/logo.tsx`. Los iconos PWA viven en `public/icon*.svg`.
+
+Las imágenes se sirven de forma local: la app no depende de Instagram en tiempo de ejecución. La procedencia pública y el mapeo de archivos están documentados en `IMAGE_SOURCES.md`.
+
+## Integraciones reales
+
+- **Base de datos:** reemplazar los arrays de `src/data/demo.ts` por repositorios que implementen las entidades de `src/types/domain.ts`. PostgreSQL + un ORM tipado es la ruta recomendada. Crear migraciones y un seed que replique los datos demo.
+- **Autenticación:** proteger `/mi-cuenta` y `/admin` con sesiones server-side y control de roles.
+- **Mercado Pago:** implementar `PaymentGateway` en `src/lib/services.ts`; nunca exponer el access token al cliente.
+- **WhatsApp:** los enlaces `wa.me` ya funcionan con mensajes contextuales. Para mensajería automática, implementar `MessagingGateway` con Business API.
+- **CRM/email:** `/api/leads` valida en servidor; persistir el resultado después de `safeParse` y enviar notificaciones de forma asíncrona.
+- **Mapas:** las sedes usan enlaces configurables y no coordenadas inventadas. Agregar latitud/longitud verificadas antes de conectar el mapa.
+- **Rutinas y reservas:** sustituir estados locales por servicios autenticados.
+- **Control de acceso:** implementar `AccessControlGateway`; el QR actual es visual y está rotulado como demo.
+
+## PWA y offline
+
+El service worker se registra únicamente en producción. Cachea la navegación pública principal y los recursos visuales. Ante cambios de estrategia de contenido, versionar `CACHE` en `public/sw.js`.
+
+## Pendiente antes de producción
+
+- Autenticación real, permisos por rol y recuperación de cuenta.
+- Persistencia, rate limiting distribuido, captcha y auditoría.
+- Precios, horarios, textos institucionales y datos biográficos oficiales.
+- Coordenadas verificadas, fichas técnicas, garantías y fotos reales por producto/sede.
+- Checkout Mercado Pago, webhooks, comprobantes e impuestos.
+- WhatsApp Business, email transaccional y consentimiento de marketing.
+- QR firmado y conexión con molinetes/control de acceso.
+- Analytics, monitoreo, política de privacidad, términos y pruebas E2E.
+
+## Calidad
+
+La aplicación incluye focus visible, labels, contraste alto, jerarquía semántica, estados vacíos/loading/error/éxito, soporte para `prefers-reduced-motion`, metadata, Open Graph, Twitter Cards, sitemap, robots y JSON-LD.
