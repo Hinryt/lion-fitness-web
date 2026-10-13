@@ -5,6 +5,7 @@ Los recursos de esta selección fueron descargados de publicaciones o perfiles p
 ## Identidad
 
 - `public/brand/lion-mark.jpg`: foto de perfil pública de [@lionfitnessgimnasio](https://www.instagram.com/lionfitnessgimnasio/).
+- `public/brand/lion-mark.svg`: versión vectorizada del JPG anterior, con curvas SVG, contornos blancos y fondo transparente. La interfaz usa este archivo para evitar pixelación al ampliar el logo. No es un archivo vectorial original de la marca; la fuente JPG se conserva como referencia.
 
 ## Gimnasios
 

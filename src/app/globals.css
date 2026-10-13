@@ -51,6 +51,8 @@ a, button, input, select, textarea { outline-offset: 3px; }
 .dashboard-panel { border: 1px solid rgba(255,255,255,.1); background: var(--card); padding: 1.25rem; }
 .grid-texture { background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px); background-size: 42px 42px; }
 .display-title { font-family: var(--font-montserrat); font-size: clamp(2.5rem, 5vw, 4.75rem); font-weight: 900; line-height: 1.02; letter-spacing: -.055em; text-transform: uppercase; text-wrap: balance; }
+.hero-lion-watermark { top: 54%; left: max(1rem, calc((100vw - 1240px) / 2 - 12rem)); width: clamp(20rem, 36vw, 34rem); aspect-ratio: 1; transform: translateY(-50%); opacity: .14; mix-blend-mode: screen; }
+@media (max-width: 767px) { .hero-lion-watermark { left: -5rem; top: 56%; width: 22rem; opacity: .1; } }
 .mobile-cta { padding-bottom: max(.75rem, env(safe-area-inset-bottom)); }
 .trial-dialog { max-height: calc(100dvh - 2rem); overscroll-behavior: contain; padding-bottom: max(1.5rem, env(safe-area-inset-bottom)); }
 .trial-dialog::backdrop { background: rgb(0 0 0 / .8); }

@@ -1,6 +1,6 @@
-const CACHE = "lion-fitness-v3";
+const CACHE = "lion-fitness-v4";
 const PUBLIC_PAGES = new Set(["/", "/sedes", "/actividades", "/horarios", "/planes", "/equipamiento", "/comunidad", "/nosotros"]);
-const PUBLIC_ASSETS = new Set(["/offline.html", "/brand/lion-mark.jpg", "/icon.svg", "/icon-maskable.svg"]);
+const PUBLIC_ASSETS = new Set(["/offline.html", "/brand/lion-mark.svg", "/icon.svg", "/icon-maskable.svg"]);
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll([...PUBLIC_ASSETS])).then(() => self.skipWaiting()));

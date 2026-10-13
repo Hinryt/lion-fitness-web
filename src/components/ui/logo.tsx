@@ -5,7 +5,7 @@ export function Logo({ compact = false }: { compact?: boolean }) {
   return (
     <Link href="/" className="group inline-flex shrink-0 items-center gap-3" aria-label="Lion Fitness, inicio">
       <span className="relative size-11 shrink-0 overflow-hidden rounded-full border border-white/20 bg-black shadow-[0_0_0_2px_rgba(255,214,0,.75)] transition-transform group-hover:-rotate-3 group-hover:scale-105">
-        <Image src="/brand/lion-mark.jpg" alt="" fill sizes="44px" className="object-cover" />
+        <Image src="/brand/lion-mark.svg" alt="" fill sizes="44px" className="object-cover" />
       </span>
       {!compact && (
         <span className="flex flex-col leading-none">

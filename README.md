@@ -80,7 +80,7 @@ public/
 - Sedes, horarios, actividades, planes, profesores, productos, teléfono y enlaces: `src/data/demo.ts`.
 - Colores y sistema visual: `src/app/globals.css`.
 - Imágenes: los recursos seleccionados de los perfiles oficiales están en `public/images/instagram`; las asignaciones de sedes y productos viven en `src/data/demo.ts`.
-- Logo: el isotipo oficial utilizado por la interfaz está en `public/brand/lion-mark.jpg` y se renderiza desde `src/components/ui/logo.tsx`. Los iconos PWA viven en `public/icon*.svg`.
+- Logo: la interfaz usa la versión vectorizada `public/brand/lion-mark.svg`, derivada del isotipo de referencia en `public/brand/lion-mark.jpg`. Se renderiza desde `src/components/ui/logo.tsx` y en la marca de agua de la portada. Los iconos PWA viven en `public/icon*.svg`.
 
 Las imágenes se sirven de forma local: la app no depende de Instagram en tiempo de ejecución. La procedencia pública y el mapeo de archivos están documentados en `IMAGE_SOURCES.md`.
 
