@@ -169,8 +169,8 @@ export const equipmentProducts: EquipmentProduct[] = [
   materials: ["Acero estructural", "Terminación de pintura configurable", "Tapizado técnico cuando aplica"],
   colors: ["Negro", "Grafito", "Color a coordinar"],
   warranty: "A confirmar según producto y configuración",
-  // Only the crossover has a matching product photograph in the current assets.
-  image: slug === "crossover" ? "/images/instagram/equipment-machine.jpg" : undefined,
+  // Real manufacturer photographs matching each equipment type; see IMAGE_SOURCES.md.
+  image: `/images/equipment/${slug}.jpg`,
   featured: featured as boolean,
 }));
 

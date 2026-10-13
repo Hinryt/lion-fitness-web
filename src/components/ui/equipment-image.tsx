@@ -1,15 +1,6 @@
 import Image from "next/image";
 
-// Visual references are separate from verified product photos and metadata.
-const illustrativeImages: Record<string, string> = {
-  "banco-plano-convergente": "/images/instagram/equipment-machine.jpg",
-  "rack-profesional": "/images/instagram/equipment-delivery.jpg",
-  "prensa": "/images/instagram/equipment-transform.jpg",
-  "hack-squat": "/images/instagram/equipment-machine.jpg",
-  "crossover": "/images/instagram/equipment-delivery.jpg",
-};
-
-export function EquipmentImage({ src, slug, name, sizes, preload = false }: { src?: string; slug: string; name: string; sizes: string; preload?: boolean }) {
-  const image = illustrativeImages[slug] ?? src ?? "/images/instagram/equipment-machine.jpg";
-  return <Image src={image} alt={image === src ? name : "Imagen ilustrativa de Lion Fitness Equipamiento"} fill preload={preload} sizes={sizes} className="object-cover transition-transform duration-500 group-hover:scale-105" />;
+export function EquipmentImage({ src, name, sizes, preload = false }: { src?: string; slug: string; name: string; sizes: string; preload?: boolean }) {
+  if (!src) return <span className="absolute inset-0 grid place-items-center text-sm text-muted">Foto no disponible</span>;
+  return <><Image src={src} alt={`Fotografía de referencia: ${name}`} fill preload={preload} sizes={sizes} className="bg-white object-contain p-3 transition-transform duration-500 group-hover:scale-105" /><span className="absolute bottom-3 right-3 bg-ink/80 px-2 py-1 text-[10px] text-white">Foto de referencia</span></>;
 }
