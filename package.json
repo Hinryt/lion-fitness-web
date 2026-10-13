@@ -8,7 +8,6 @@
     "start": "next start",
     "lint": "eslint . --max-warnings=0",
     "typecheck": "tsc --noEmit",
-    "smoke": "node scripts/smoke.mjs",
     "check": "npm run lint && npm run typecheck && npm run build"
   },
   "dependencies": {

@@ -76,7 +76,7 @@ export interface EquipmentProduct {
   materials: string[];
   colors: string[];
   warranty?: string;
-  image: string;
+  image?: string;
   featured?: boolean;
 }
 
@@ -94,4 +94,3 @@ export interface Member {
   membershipStatus: "Activa" | "Pendiente" | "Vencida";
   nextDueDate: string;
 }
-

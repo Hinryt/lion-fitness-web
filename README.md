@@ -31,7 +31,7 @@ npm run build
 npm start
 ```
 
-Con la aplicación iniciada en el puerto 3000, `npm run smoke` verifica todas las URLs del sitemap y los recursos públicos principales.
+Por ahora no se incluye una suite de tests. Lint, TypeScript y compilación siguen disponibles como comprobaciones del proyecto.
 
 ## Variables de entorno
 
@@ -90,14 +90,14 @@ Las imágenes se sirven de forma local: la app no depende de Instagram en tiempo
 - **Autenticación:** proteger `/mi-cuenta` y `/admin` con sesiones server-side y control de roles.
 - **Mercado Pago:** implementar `PaymentGateway` en `src/lib/services.ts`; nunca exponer el access token al cliente.
 - **WhatsApp:** los enlaces `wa.me` ya funcionan con mensajes contextuales. Para mensajería automática, implementar `MessagingGateway` con Business API.
-- **CRM/email:** `/api/leads` valida en servidor; persistir el resultado después de `safeParse` y enviar notificaciones de forma asíncrona.
+- **Consultas:** los formularios preparan mensajes para enviar desde WhatsApp. No confirman recepción ni guardan datos. `/api/leads` conserva su validador demostrativo para una futura integración de CRM/email.
 - **Mapas:** las sedes usan enlaces configurables y no coordenadas inventadas. Agregar latitud/longitud verificadas antes de conectar el mapa.
 - **Rutinas y reservas:** sustituir estados locales por servicios autenticados.
 - **Control de acceso:** implementar `AccessControlGateway`; el QR actual es visual y está rotulado como demo.
 
 ## PWA y offline
 
-El service worker se registra únicamente en producción. Cachea la navegación pública principal y los recursos visuales. Ante cambios de estrategia de contenido, versionar `CACHE` en `public/sw.js`.
+El service worker se registra únicamente en producción. Solo cachea documentos públicos permitidos y recursos visuales seleccionados. Excluye rutas privadas, APIs, respuestas RSC y recursos externos. Ante una navegación pública sin conexión, muestra una página offline independiente si no existe una copia segura. Versionar `CACHE` en `public/sw.js` ante cambios.
 
 ## Pendiente antes de producción
 

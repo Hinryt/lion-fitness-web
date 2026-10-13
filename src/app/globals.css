@@ -11,19 +11,24 @@
   --color-gym: var(--gym); --color-equipment: var(--equipment);
   --color-surface: var(--text); --color-muted: var(--muted);
   --color-error: var(--error); --color-success: var(--success);
-  --font-sans: var(--font-inter); --font-heading: var(--font-anton);
+  --font-sans: var(--font-montserrat); --font-heading: var(--font-montserrat);
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; background: var(--ink); }
-body { margin: 0; background: var(--ink); color: var(--text); font-family: var(--font-inter), sans-serif; }
+html { scroll-behavior: smooth; scroll-padding-top: 6rem; background: var(--ink); color-scheme: dark; }
+body { margin: 0; background: var(--ink); color: var(--text); font-family: var(--font-montserrat), sans-serif; }
+.font-heading { font-weight: 800; letter-spacing: -.045em; line-height: 1.08; text-transform: uppercase; text-wrap: balance; }
+h1, h2, h3 { text-wrap: balance; overflow-wrap: break-word; }
+h1.font-heading { font-size: clamp(2.5rem, 6vw, 4.5rem); }
+a, button { touch-action: manipulation; }
+[id] { scroll-margin-top: 6rem; }
 a, button, input, select, textarea { outline-offset: 3px; }
 :focus-visible { outline: 2px solid var(--lion); }
 ::selection { background: var(--lion); color: var(--ink); }
 .container-shell { width: min(100% - 2rem, 1240px); margin-inline: auto; }
 .page-shell { min-height: 70vh; padding-block: 9rem 6rem; }
 .section-space { padding-block: clamp(4.5rem, 9vw, 8rem); }
-.eyebrow { color: var(--lion); font-size: .72rem; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; }
+.eyebrow { color: var(--lion); font-size: .8rem; font-weight: 800; letter-spacing: .04em; }
 .nav-link { padding: .75rem .65rem; color: var(--muted); font-size: .72rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; transition: color .2s ease; }
 .nav-link:hover { color: white; }
 .button-base { display: inline-flex; min-height: 3rem; align-items: center; justify-content: center; gap: .55rem; border: 1px solid transparent; padding: .75rem 1.25rem; font-size: .78rem; font-weight: 900; letter-spacing: .06em; text-transform: uppercase; transition: transform .18s ease, background-color .18s ease, border-color .18s ease; cursor: pointer; }
@@ -41,11 +46,16 @@ a, button, input, select, textarea { outline-offset: 3px; }
 .unit-pill { display: inline-flex; width: fit-content; border: 1px solid currentColor; padding: .3rem .55rem; font-size: .62rem; font-weight: 900; letter-spacing: .11em; text-transform: uppercase; }
 .unit-gym { color: #5fa6ff; } .unit-box { color: var(--lion); } .unit-equipment { color: #aeb4be; }
 .empty-state { margin-top: 1.5rem; display: grid; min-height: 18rem; place-items: center; align-content: center; gap: .75rem; border: 1px dashed rgba(255,255,255,.18); padding: 2rem; text-align: center; color: var(--muted); }
-.empty-state h2 { color: white; font-family: var(--font-anton); font-size: 1.75rem; text-transform: uppercase; }
+.empty-state h2 { color: white; font-family: var(--font-montserrat); font-size: 1.75rem; font-weight: 800; }
 .metric-card { border-left: 3px solid var(--lion); background: var(--card); padding: 1.25rem; }
 .dashboard-panel { border: 1px solid rgba(255,255,255,.1); background: var(--card); padding: 1.25rem; }
 .grid-texture { background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px); background-size: 42px 42px; }
-.display-title { font-family: var(--font-anton); font-size: clamp(4rem, 10vw, 9rem); line-height: .84; letter-spacing: -.02em; text-transform: uppercase; }
+.display-title { font-family: var(--font-montserrat); font-size: clamp(2.5rem, 5vw, 4.75rem); font-weight: 900; line-height: 1.02; letter-spacing: -.055em; text-transform: uppercase; text-wrap: balance; }
+.mobile-cta { padding-bottom: max(.75rem, env(safe-area-inset-bottom)); }
+.trial-dialog { max-height: calc(100dvh - 2rem); overscroll-behavior: contain; padding-bottom: max(1.5rem, env(safe-area-inset-bottom)); }
+.trial-dialog::backdrop { background: rgb(0 0 0 / .8); }
+.field-error { color: #ff9090; }
+@media (max-width: 767px) { body:not(:has(.dashboard-root)) { padding-bottom: calc(5rem + env(safe-area-inset-bottom)); } }
 .fade-up { animation: fade-up .65s ease-out both; }
 @keyframes fade-up { from { opacity: 0; transform: translateY(18px); } }
 @media (max-width: 640px) { .container-shell { width: min(100% - 1.25rem, 1240px); } .page-shell { padding-top: 7.5rem; padding-bottom: 4rem; } }

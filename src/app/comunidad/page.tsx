@@ -5,7 +5,7 @@ import { ButtonLink } from "@/components/ui/button-link";
 import { PageHero } from "@/components/ui/page-hero";
 import { trainers } from "@/data/demo";
 
-export const metadata: Metadata = { title: "Comunidad", description: "Conocé la comunidad, los profesores y los desafíos de Lion Fitness." };
+export const metadata: Metadata = { alternates: { canonical: "/comunidad" }, title: "Comunidad", description: "Conocé la comunidad, los profesores y los desafíos de Lion Fitness." };
 export default function CommunityPage() { return <><PageHero eyebrow="Más que un gimnasio" title="La fuerza también se contagia" description="Entrenamos en comunidad porque llegar acompañado, compartir un objetivo y celebrar el progreso hace la diferencia." /><section className="border-y border-white/10 bg-card py-4"><div className="container-shell grid min-h-80 gap-4 md:grid-cols-[1fr_1.15fr_1fr]">{[
   ["/images/instagram/gym-wilde.jpg", "Sede Wilde"],
   ["/images/instagram/box-community.jpg", "Lion Fitness Box"],

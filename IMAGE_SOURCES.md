@@ -23,3 +23,5 @@ Los recursos de esta selección fueron descargados de publicaciones o perfiles p
 - `equipment-transform.jpg`: [publicación pública](https://www.instagram.com/lionfitnessequipamiento/reel/DNT7RMdP9SC/) de [@lionfitnessequipamiento](https://www.instagram.com/lionfitnessequipamiento/).
 
 La cuenta [@joniiabate](https://www.instagram.com/joniiabate/) se tomó únicamente como referencia conceptual porque su contenido no es público; no se descargaron ni incorporaron fotografías privadas.
+
+El catálogo recupera la selección visual anterior con fotografías ilustrativas en lugar de placeholders. Esta selección se define en `src/components/ui/equipment-image.tsx` y no identifica necesariamente el modelo de cada ficha. Los datos y la metadata conservan únicamente las fotografías correspondientes verificadas, separadas de esta presentación visual.

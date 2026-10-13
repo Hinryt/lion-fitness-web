@@ -9,6 +9,7 @@ export const leadSchema = z.object({
   phone: phoneSchema,
   branch: z.string().trim().min(1, "Elegí una sede"),
   reason: z.string().trim().min(2, "Elegí un motivo"),
+  activity: z.string().trim().optional(),
   message: z.string().trim().max(1000, "El mensaje es demasiado largo"),
   website: z.string().max(0).optional(),
 });
